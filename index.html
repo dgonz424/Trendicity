@@ -2,245 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Firebase Chat</title>
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
-<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
-
-
-<!-- Inline CSS -->
-
-<style>
-    body {
-      font-family: 'HelveticaNeue-Light';
-    }
-    .msg {
-      margin: 10px 0;
-      padding: 10px;
-      width: 400px;
-      background-color: #efefef;
-    }
-    #username, #text {
-      margin: 5px 0px;
-    }
-    #post {
-      padding: 0.5em 1em;
-      background-color: #50b1ff;
-      border: none;
-      color: #FFF;
-    }
-  </style>
+  <title>trendicity</title>
 </head>
 <body>
-  <h1> #IGotATaxDeductionFor (Trending topic) </h1>
-  <button id="login">Login with Twitter</button><br/>
-  <input id="text" type="text" placeholder="Message"><br/>
-  <button id="post">Post</button><br/>
-  <div id="results"></div>
-
-  <div id="chat">
-        <div id="chat-messages"></div>
-        <div id="chat-bar">
-          <input id="chat-input" />
-          <button id="chat-send">Send</button>
+  <header id="intro">
+    <div class="container">
+      <div class="table">
+        <div class="header-text">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <h1 class="light white">Welcome to Trendicity</h1>
+              <h1 class="white typed">What is your city talking about?</h1>
+              <span class="typed-cursor">|</span>
+            </div>
+          </div>
         </div>
       </div>
-  
-  <script>
-  
+    </div>
+  </header>
+      <!-- Actor buttons will get added here -->
+    <div id="orlandoImage">
+      <img src="images/orlando.jpg" id="orlando" data-name="city" alt="Orlando">
+    </div>
+    
+    <!--list of trends show here-->
+    <div id="trends" data-name="trend">
+    </div>
+    
+    <div id="firechat-wrapper">
+          <button onclick="login('twitter');">Login with Twitter</button>
+      </div>
 
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCL2jHHGHkdfFigqmtwLkUsWkInuxSMsj4",
-    authDomain: "chat-room-dd9cf.firebaseapp.com",
-    databaseURL: "https://chat-room-dd9cf.firebaseio.com",
-    storageBucket: "chat-room-dd9cf.appspot.com",
-    messagingSenderId: "57403322938"
-  };
-  firebase.initializeApp(config);
+    <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
-  var database = firebase.database();
-
-
-
-
-
-
-
-
-    var textInput = document.querySelector('#text');
-    var postButton = document.querySelector('#post');
-
-// ADD THESE 4 LINES
-    var username = null;
-    var loginButton = document.querySelector('#login');
-    postButton.style.display = "none";
-    textInput.style.display = "none";
-    console.log(username);
-
-loginButton.addEventListener("click", function() {
-firebase.auth().signInWithPopup(provider);
-console.log("provider: " + provider);
-
-});
-
-
-  // Authentication through twitter
-
-var provider = new firebase.auth.TwitterAuthProvider();
-
-
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-  // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
-  // You can use these server side with your app's credentials to access the Twitter API.
-  var token = result.credential.accessToken;
-  var secret = result.credential.secret;
-  // The signed-in user info.
-  var user = result.user;
-  console.log(user);
-  console.log(result.user.displayName);
-  console.log(result);
-  if (result) {
-        username = result.user.displayName;
-        loginButton.textContent = "Logged in as " + username;
-        loginButton.disabled = true;
-        postButton.style.display = "block";
-        textInput.style.display = "block";
-
-}
-  // ...
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
-
-
-    postButton.addEventListener("click", function() {
-      // ADD THIS LINE
-      var msgUser = username;
-
-      var msgText = textInput.value;
-      database.ref().push({username:msgUser, text:msgText});
-     textInput.value = "";
-    });
-
-var startListening = function() {
-      database.ref().on('child_added', function(snapshot) {
-        var msg = snapshot.val();
-      
-        var msgUsernameElement = document.createElement("b");
-        msgUsernameElement.textContent = msg.username;
-        
-        var msgTextElement = document.createElement("p");
-        msgTextElement.textContent = msg.text;
-  
-        var msgElement = document.createElement("div");
-        msgElement.appendChild(msgUsernameElement);
-        msgElement.appendChild(msgTextElement);
-
-        msgElement.className = "msg";
-        
-        document.getElementById("results").appendChild(msgElement);
-        console.log("MsgElement" + msgElement);
-      });
-    }
-
-    // Begin listening for data
-    startListening();
-
-    // CHAT LISTENERS
-// Chat send button listener, grabs input and pushes to firebase. (Firebase's push automatically creates a unique key)
-$("#chat-send").click(function() {
-
-  if ($("#chat-input").val() !== "") {
-
-    var message = $("#chat-input").val();
-
-    chatData.push({
-      name: username,
-      message: message,
-      time: firebase.database.ServerValue.TIMESTAMP,
-      idNum: playerNum
-    });
-
-    $("#chat-input").val("");
-  }
-});
-
-// Chatbox input listener
-
-$("#chat-input").keypress(function(e) {
-
-  if (e.keyCode === 13 && $("#chat-input").val() !== "") {
-
-    var message = $("#chat-input").val();
-
-    chatData.push({
-      name: username,
-      message: message,
-      time: firebase.database.ServerValue.TIMESTAMP,
-      idNum: playerNum
-    });
-
-    $("#chat-input").val("");
-  }
-});
-
-// Click event for dynamically added <li> elements
-$(document).on("click", "li", function() {
-
-  console.log("click");
-
-  // Grabs text from li choice
-  var clickChoice = $(this).text();
-  console.log(playerRef);
-
-  // Sets the choice in the current player object in firebase
-  playerRef.child("choice").set(clickChoice);
-
-  // User has chosen, so removes choices and displays what they chose
-  $("#player" + playerNum + " ul").empty();
-  $("#player" + playerNum + "chosen").html(clickChoice);
-
-  // Increments turn. Turn goes from:
-  // 1 - player 1
-  // 2 - player 2
-  // 3 - determine winner
-  currentTurnRef.transaction(function(turn) {
-    return turn + 1;
-  });
-});
-
-// Update chat on screen when new message detected - ordered by 'time' value
-chatData.orderByChild("time").on("child_added", function(snapshot) {
-
-  // If idNum is 0, then its a disconnect message and displays accordingly
-  // If not - its a user chat message
-  if (snapshot.val().idNum === 0) {
-    $("#chat-messages").append("<p class=player" + snapshot.val().idNum + "><span>"
-    + snapshot.val().name + "</span>: " + snapshot.val().message + "</p>");
-  }
-  else {
-    $("#chat-messages").append("<p class=player" + snapshot.val().idNum + "><span>"
-    + snapshot.val().name + "</span>: " + snapshot.val().message + "</p>");
-  }
-
-  // Keeps div scrolled to bottom on each update.
-  $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
-});
-
-
-
-
-  </script>
-
-
+  <!-- Firechat -->
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+  <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+  <!--local JS file-->
+  <script type="text/javascript" src="assets/javascript/trainLogic.js"></script>
 </body>
 </html>
