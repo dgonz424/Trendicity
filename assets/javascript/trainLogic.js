@@ -68,15 +68,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 
 
 
-         
-
-      // use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
-      // Firechat.createRoom(roomName, roomType, callback(roomId))
-      // click to open chat room of button's topic name. 
-      $(".button").on("click",function() {
-      Firechat.enterRoom(this.attr('id'));
-
-      //begin login to twitter function
+//begin login to twitter function
       function login() {
         // Log the user in via Twitter
         var provider = new firebase.auth.TwitterAuthProvider();
@@ -84,6 +76,14 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
           console.log("Error authenticating user:", error);
         });
       }
+
+             
+
+      // use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
+      // Firechat.createRoom(roomName, roomType, callback(roomId))
+      // click to open chat room of button's topic name. 
+      $(".button").on("click",function() {
+      Firechat.enterRoom(this.attr('id'));
 
       firebase.auth().onAuthStateChanged(function(user) {
         // Once authenticated, instantiate Firechat with the logged in user
@@ -101,7 +101,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 
         // Set the Firechat user
         chat.setUser(user.uid, user.displayName);
-      }
+      }  
       
       });
 
