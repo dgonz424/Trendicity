@@ -35,11 +35,11 @@ $.ajax(settings).done(function (response) {
 //begin Firebase and Firechat
 //Initialize Firebase
   var config = {
-    apiKey: "AIzaSyA4ZMBx8F2AEszwQk4M-GiGaOnjP6QMBsY",
-    authDomain: "firechat-test-fde48.firebaseapp.com",
-    databaseURL: "https://firechat-test-fde48.firebaseio.com",
-    storageBucket: "firechat-test-fde48.appspot.com",
-    messagingSenderId: "423047939499"
+    apiKey: "AIzaSyAnUO1NpumTuCU89-xryIQvu_7jM8MhDF8",
+    authDomain: "trendicity-c16e7.firebaseapp.com",
+    databaseURL: "https://trendicity-c16e7.firebaseio.com",
+    storageBucket: "trendicity-c16e7.appspot.com",
+    messagingSenderId: "74588201568"
   };
   firebase.initializeApp(config);
 
