@@ -15,31 +15,38 @@
 //ajax call for settings variable data 
 $.ajax(settings).done(function (response) {
   console.log(response);
-  		for (var i = 0; i < 10; i++) {
-  			//storing results from API response in a variable
-      	  var results = response[0].trends[i].name;
-      	  console.log(results);
-
+        for (var i = 0; i < 10; i++) {
+            //storing results from API response in a variable
+          var results = response[0].trends[i].name;
+          console.log(results);
         //generate a button for each trend name
-        var newButton = $("<button>");
+        var newButton = $("<button class='button'>");
         //add a class
-        newButton.addClass("trend-name");
+        newButton.attr("id", results);
         //add each trend name as text inside the button
+            console.log(newButton.attr('id'));
         newButton.text(results);
         //append each button to the page
         $("#trends").append(newButton);
   		}//response function end
 }); //ajax end
 
+// use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
+// Firechat.createRoom(roomName, roomType, callback(roomId))
+// click to open chat room of button's topic name. 
+// $(".button").on("click",function() {
+// Firechat.enterRoom(this.attr('id'));
+// });
+
 
 //begin Firebase and Firechat
 //Initialize Firebase
   var config = {
-    apiKey: "AIzaSyAnUO1NpumTuCU89-xryIQvu_7jM8MhDF8",
-    authDomain: "trendicity-c16e7.firebaseapp.com",
-    databaseURL: "https://trendicity-c16e7.firebaseio.com",
-    storageBucket: "trendicity-c16e7.appspot.com",
-    messagingSenderId: "74588201568"
+    apiKey: "AIzaSyA4ZMBx8F2AEszwQk4M-GiGaOnjP6QMBsY",
+    authDomain: "firechat-test-fde48.firebaseapp.com",
+    databaseURL: "https://firechat-test-fde48.firebaseio.com",
+    storageBucket: "firechat-test-fde48.appspot.com",
+    messagingSenderId: "423047939499"
   };
   firebase.initializeApp(config);
 
