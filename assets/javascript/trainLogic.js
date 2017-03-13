@@ -31,14 +31,6 @@ $.ajax(settings).done(function (response) {
   		}//response function end
 }); //ajax end
 
-// use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
-// Firechat.createRoom(roomName, roomType, callback(roomId))
-// click to open chat room of button's topic name. 
-// $(".button").on("click",function() {
-// Firechat.enterRoom(this.attr('id'));
-// });
-
-
 //begin Firebase and Firechat
 //Initialize Firebase
   var config = {
@@ -103,6 +95,12 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
         chat.setUser(user.uid, user.displayName);
       }         
 
+      // use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
+      // Firechat.createRoom(roomName, roomType, callback(roomId))
+      // click to open chat room of button's topic name. 
+      $(".button").on("click",function() {
+      Firechat.enterRoom(this.attr('id'));
+      });
 
 
 
