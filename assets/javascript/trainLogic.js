@@ -88,24 +88,18 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
         // Get a Firebase Database ref
         var chatRef = firebase.database().ref("chat");
 
-        // // Create a Firechat instance
-        // var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
-
-        // // Set the Firechat user
-        // chat.setUser(user.uid, user.displayName);
-      }         
-
-      // use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
-      // Firechat.createRoom(roomName, roomType, callback(roomId))
-      // click to open chat room of button's topic name. 
-      $(".button").on("click",function() {
-      // Create a Firechat instance
+        // Create a Firechat instance
         var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
 
         // Set the Firechat user
         chat.setUser(user.uid, user.displayName);
-      // Firechat.enterRoom(this.attr('id'));
-      });
+      }         
+// use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
+// Firechat.createRoom(roomName, roomType, callback(roomId))
+// click to open chat room of button's topic name. 
+$(".button").on("click",function() {
+Firechat.enterRoom(this.attr('id'));
+});
 
 
 
