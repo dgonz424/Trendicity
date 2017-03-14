@@ -98,7 +98,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 // Firechat.createRoom(roomName, roomType, callback(roomId))
 // click to open chat room of button's topic name. 
 $(".button").on("click",function() {
-location.href='https://google.com/'+'#trends';
+location.href='https://google.com/'+'newButton';
 });
 
 
