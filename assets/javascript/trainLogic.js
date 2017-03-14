@@ -97,9 +97,9 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 // use this line below, somehow, to create rooms of the quantity and names specified by the ajax. 
 // Firechat.createRoom(roomName, roomType, callback(roomId))
 // click to open chat room of button's topic name. 
-$(".button").on("click",function() {
-Firechat.enterRoom(this.attr('id'));
-});
+// $(".button").on("click",function() {
+// Firechat.enterRoom(this.attr('id'));
+// });
 
 
 
