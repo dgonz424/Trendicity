@@ -47,12 +47,24 @@ $.ajax(settings).done(function (response) {
         //add each trend name as text inside the button
             console.log(newButton.attr('id'));
         newButton.text(results);
+
         //append each button to the page
         $("#trends").append(newButton);
     
 
 
       }//response function end
+      console.log('click')
+
+var chatDiv = $("<div id='chat'></div>");
+var chatMessages = $("<div id='messages'></div>");
+var chatBar = $("<div id='bar'></div>");
+var chatInput = $("<div id='input'></div>");
+var chatSend = $("<div id='send'></div>");
+
+chatDiv.append(chatMessages, chatBar, chatInput, chatSend);
+
+$('#display').append(chatDiv);
 }); //ajax end
 
 
@@ -70,6 +82,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   var secret = result.credential.secret;
   // The signed-in user info.
   var user = result.user;
+  console.log(user);
   // ...
 }).catch(function(error) {
   // Handle Errors here.
@@ -86,9 +99,17 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 // click to open chat room of button's topic name. 
 $(".button").on("click",function() {
 database.ref("/chat- " + $(this).attr("id"));
-console.log($(this).attr('id'))
+$(this).attr('id')
+
+
 
 });
+
+
+
+
+
+$("#display").append(chatDiv);
 
 $(".chat-send").on('click', function(){
 
@@ -141,7 +162,7 @@ chatData.orderByChild("time").on("child_added", function(snapshot) {
   }
 
   // Keeps div scrolled to bottom on each update.
-  $(".chat-messages").scrollTop($(".chat-messages")[0].scrollHeight);
+  // $(".chat-messages").scrollTop($(".chat-messages")[0].scrollHeight);
 });
 
 
