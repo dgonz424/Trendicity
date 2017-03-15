@@ -102,6 +102,7 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
 // click to open chat room of button's topic name. 
 $(".button").on("click",function() {
 this.attr('data-type');
+console.log("string")
 });
 
 
