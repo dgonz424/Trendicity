@@ -23,7 +23,7 @@ $.ajax(settings).done(function (response) {
         var newButton = $("<button class='button'>");
         //add a class
         newButton.attr("id", results);
-        newButton.attr('data-type', 'site:google.com' + results);
+        newButton.attr('data-type', 'site:google.com ' + results);
         //add each trend name as text inside the button
             console.log(newButton.attr('id'));
         newButton.text(results);
