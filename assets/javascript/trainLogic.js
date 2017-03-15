@@ -23,7 +23,8 @@
     "postman-token": "0daac021-8084-9b44-33e4-129b7c0171d7"
   }
 }
-
+  //create a reference to the database
+var database = firebase.database();
 // variables
 var chatData = database.ref("/chat");
 
@@ -58,8 +59,7 @@ $.ajax(settings).done(function (response) {
 
 //Initialize Firebase
   
-  //create a reference to the database
-var database = firebase.database();
+
 
 var provider = new firebase.auth.TwitterAuthProvider();
 
