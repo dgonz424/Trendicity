@@ -1,3 +1,10 @@
+//new chat div created every time buttons clicked (problem)
+//make div large enough to display in CSS
+//make if, else statements so no new div is created for existing button divs
+//make if, else statements so no new div is created for existing button divs (firebase as well)
+//all chatData.push() sent to firebase and display
+//empty chatDiv before new button click to display new content each time
+
 // Initialize Firebase
  var config = {
    apiKey: "AIzaSyA4ZMBx8F2AEszwQk4M-GiGaOnjP6QMBsY",
