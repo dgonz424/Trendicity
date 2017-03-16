@@ -29,9 +29,25 @@
     <div id="trends" data-name="trend">
     </div>
     
+    
     <div id="display">
-          <button onclick="login('twitter');">Login with Twitter</button>
+    <style> #display {
+      height:500px;
+      width:500px;
+    }
+    </style>
+    
       </div>
+
+<div id="chat" class="chat">
+       <div id="chat-messages"></div>
+       <div id="chat-bar">
+         <input id="chat-input" />
+         <button id="chat-send">Send</button>
+       </div>
+
+          <button onclick="login('twitter');">Login with Twitter</button>
+    }
 
     <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -40,8 +56,7 @@
   <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
   <!-- Firechat -->
-  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css"/>
-  <link rel="stylesheet" src="assets/images/Orlando.jpg"/>
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
   <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
   <!--local JS file-->
   <script type="text/javascript" src="assets/javascript/trainLogic.js"></script>
