@@ -5,6 +5,8 @@
 //all chatData.push() sent to firebase and display
 //empty chatDiv before new button click to display new content each time
 
+
+
 // Initialize Firebase
  var config = {
    apiKey: "AIzaSyA4ZMBx8F2AEszwQk4M-GiGaOnjP6QMBsY",

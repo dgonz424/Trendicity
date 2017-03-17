@@ -3,38 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>trendicity</title>
-<!--   <style>
-    span {
-      visibility: hidden;
-    }
-  </style> -->
+<span style="color:red">
 </head>
 <body>
 
 
   <header id="intro">
-<!--     <div class="container">
-      <div class="table">
-        <div class="header-text">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <h1 class="light white">Welcome to Trendicity</h1>
-              <h1 class="white typed">What is your city talking about?</h1>
-              <span class="typed-cursor">|</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
     <header id="intro">
     <div class="container">
         <div class="table">
             <div class="header-text">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p class="light white">Welcome to <i><b>Trendicity.</b></i></p>
-                        <h1 class="light white" id="typing-title"></h1>
+                        <p >Welcome to <i><b>Trendicity.</b></i></p>
+                        <h1 id="typing-title"></h1>
                         <script>
+                        document.body.style.backgroundImage = "url('assets/images/header.jpg')";
                             document.addEventListener('DOMContentLoaded', function() {
                                 Typed.new('#typing-title', {
                                     strings: ["What is Orlando Talking about?"],
@@ -50,10 +35,6 @@
     </div>
 </header>
   </header>
-      <!-- Actor buttons will get added here -->
-    <!-- <div id="orlandoImage">
-      <img src="assets/images/Orlando.jpg" id="orlando" data-name="city" alt="Orlando">
-    </div> -->
     
     <!--list of trends show here-->
     <div id="trends" data-name="trend">
@@ -76,8 +57,9 @@
          <button id="chat-send">Send</button>
        </div>
 
-          <!-- <button onclick="login('twitter');">Login with Twitter</button> -->
-    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" src="assets/css/style.css"/>
 
     <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -85,10 +67,7 @@
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-  <link rel="stylesheet" src="assets/css/style.css"/>
 
   <!-- Firechat -->
   <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
