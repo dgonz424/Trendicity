@@ -1,9 +1,4 @@
-//new chat div created every time buttons clicked (problem)
-//make div large enough to display in CSS
-//make if, else statements so no new div is created for existing button divs
-//make if, else statements so no new div is created for existing button divs (firebase as well)
-//all chatData.push() sent to firebase and display
-//empty chatDiv before new button click to display new content each time
+
 
 
 
@@ -19,7 +14,7 @@
 
 
 
-//function displayTrendInfo() {
+// object used to make the api request
     
   var settings = {
   "async": true,
@@ -38,20 +33,14 @@
 var database = firebase.database();
 
 
-// variables
+// global variables for the chat object, chatData. Username becomes the twitter username below. 
 var chatData = database.ref("/chat");
 var username = "";
 var message = "";
 
 
 
-
-
-
-
-
-
-//Initialize Firebase
+// save the firebase twitter auth as a variable, set up so it pops up on page load. 
   
 
 var provider = new firebase.auth.TwitterAuthProvider();
@@ -76,58 +65,61 @@ firebase.auth().signInWithPopup(provider).then(function(result) {
   // ...
 });
 
-console.log(username);
 
 
-//ajax call for settings variable data 
+//ajax call to the twitter API for getting the trending topics. We got 10.  
 $.ajax(settings).done(function (response) {
   console.log(response);
       for (var i = 0; i < 10; i++) {
-        //storing results from API response in a variable
+        //storing results from API response in a variable, results.
           var results = response[0].trends[i].name;
           console.log(results);
 
         //generate a button for each trend name
         var newButton = $("<button class='button'>");
-        //add a class
+        //add an id equal to the trend's name. 
         newButton.attr("id", results);
         //add each trend name as text inside the button
+        newButton.text(results);
+         
             console.log(newButton.attr('id'));
             console.log(newButton.attr('class'));
-        newButton.text(results);
-        //append each button to the page
+        //append each button to the page in the trends div. 
         $("#trends").append(newButton);
     
 
 
-      }//response function end
+      }// end of for loop that makes buttons. 
 
 
-// click to open chat room of button's topic name. needs to be edited to not be able to make multiple of the same chat room to the page. 
+// click any button to open chat room of button's topic name. 
 $(".button").on("click",function() {
-$("#display").empty();
+
+// empty the display div of any previous chat. 
+ $("#display").empty();
 
 
-
+// save the trend name as a string without any non-alphanumeric characters.
 var trendNames = ($(this).attr('id').replace('#', ''));
 console.log(trendNames);
+// turn off the listener to get only one of each message to appear in the display div.  
 chatData.off();
+// give the global variable a name equal to its id, without the "#" which firebase won't accept. 
 chatData =database.ref("/chat- " + trendNames);
-
+// send it to firebase.
     chatData.push();
+// make a chat div and a messages div, where the messages retrieved will be displayed.  
 var chatDiv = $("<div id='chat'></div>");
 var chatMessages = $("<div id='messages'></div>");
-// var chatBar = $("<div id='bar'></div>");
-// var chatInput = $("<input id='input'></input>");
-// var chatSend = $("<button id='send'></button>");
- 
-// chatBar.append(chatInput, chatSend);
 
+// give the chat box a title equal to its 'id', and hyperlink it so users can easily lookup the trend on google.
 var chatTitle = $("<a href= https://www.google.com/webhp?sourceid=chrome-instant&rlz=1C1CHBF_enUS730US730&ion=1&espv=2&ie=UTF-8#q=" + $(this).attr('id') + "&*</a>" + "<h3>"+ $(this).attr('id') + "</h3>");
-chatDiv.append(chatMessages, chatTitle, "<hr>");
+
+// append elements to chat div, then display on page.   
+ chatDiv.append(chatMessages, chatTitle, "<hr>");
 $('#display').append(chatDiv);
 
-
+// click listener for the send button. Pushes message and username and timestamp to firebase. Username is equal to the twitter displayName of the user retrieved during authentication.
 $("#chat-send").on('click', function(){
   if ($("#chat-input").val() !== "") {
     var message = $("#chat-input").val();
@@ -137,6 +129,8 @@ $("#chat-send").on('click', function(){
       message: message,
       time: firebase.database.ServerValue.TIMESTAMP,
     });
+   
+   // reset the chat input field to be empty. 
     $("#chat-input").val("");
 
 
@@ -150,27 +144,22 @@ $("#chat-send").on('click', function(){
 
 
 });
-// if chatData -id doesn't exist...do this. else, don't:
 
 
-// Update chat on screen when new message detected - ordered by 'time' value
+// Update chat on screen when new message detected - ordered by 'time' value. Displays the info sent to the database to the page.
+// Since this is in the send button function the display only appears when a user presses send. 
 chatData.orderByChild("time").on("child_added", function(snapshot) {
-// in addition to push, the button should change the lcoation
-  // If idNum is 0, then its a disconnect message and displays accordingly
-  // If not - its a user chat message
-  if (snapshot.val().idNum === 0) {
-    $("#display").append("<p class=player" + snapshot.val().idNum + "><span>"
+  
+    $("#display").append("<p class=player" + "><span>"
     + snapshot.val().name + "</span>: " + snapshot.val().message + "</p>");
-  }
-  else {
-    $("#display").append("<p class=player" + snapshot.val().idNum + "><span>"
-    + snapshot.val().name + "</span>: " + snapshot.val().message + "</p>");
-  }
+ 
 
   // Keeps div scrolled to bottom on each update.
   $("#display").scrollTop($("#display")[0].scrollHeight);
 });
 
+ 
+ // makes it so users can submit their messages with a press of enter key. 
 $("#chat-input").keypress(function(e) {
 
   if (e.keyCode === 13 && $("#chat-input").val() !== "") {
