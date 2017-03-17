@@ -105,8 +105,11 @@ $.ajax(settings).done(function (response) {
 $(".button").on("click",function() {
 $("#display").empty();
 
+
+
 var trendNames = ($(this).attr('id').replace('#', ''));
 console.log(trendNames);
+chatData.off();
 chatData =database.ref("/chat- " + trendNames);
 
     chatData.push();
@@ -133,6 +136,8 @@ $("#chat-send").on('click', function(){
       time: firebase.database.ServerValue.TIMESTAMP,
     });
     $("#chat-input").val("");
+
+
   
 
 
